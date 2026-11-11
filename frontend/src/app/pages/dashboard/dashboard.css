@@ -1,0 +1,303 @@
+/* Paleta mas o menos parecida a la de Steam :) */
+:host,
+:root {
+  --fondo: #1b2838;
+  --fondo-oscuro: #171a21;
+  --fondo-tarjeta: #16202d;
+  --borde: #2a475e;
+  --texto: #c7d5e0;
+  --texto-blanco: #ffffff;
+  --texto-apagado: #8f98a0;
+  --azul: #66c0f4;
+  --verde: #5ba32b;
+  --amarillo: #e4c879;
+  --turquesa: #4fd1b5;
+}
+
+:host {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* La página completa */
+.pagina {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, var(--fondo-oscuro), var(--fondo) 300px);
+  background-color: var(--fondo);
+  color: var(--texto);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Barra superior del dashboard */
+.barra-superior {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 0 32px;
+  height: 60px;
+  background: var(--fondo-oscuro);
+  border-bottom: 1px solid #000;
+}
+
+.logo {
+  color: var(--texto-blanco);
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.menu {
+  display: flex;
+  gap: 4px;
+  height: 100%;
+}
+
+.menu-enlace {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  color: var(--texto-apagado);
+  font-size: 13px;
+  text-transform: uppercase;
+  border-bottom: 3px solid transparent;
+}
+
+.menu-enlace:hover {
+  color: var(--texto-blanco);
+}
+
+.menu-enlace.activo {
+  color: var(--texto-blanco);
+  border-bottom-color: var(--azul);
+}
+
+/* Todo el contenido que se muestra en el dashboard */
+.contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.cabecera h1 {
+  margin: 0;
+  color: var(--texto-blanco);
+  font-size: 28px;
+  font-weight: normal;
+}
+
+.acciones {
+  display: flex;
+  gap: 10px;
+}
+
+/* ===== BUSCADOR Y BOTÓN ===== */
+.buscador {
+  width: 240px;
+  padding: 9px 12px;
+  background: #316282;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--borde);
+  border-radius: 3px;
+  color: var(--texto-blanco);
+  font-size: 13px;
+}
+
+.buscador::placeholder {
+  color: var(--texto-apagado);
+}
+
+.buscador:focus {
+  outline: none;
+  border-color: var(--azul);
+}
+
+.boton-anadir {
+  padding: 9px 18px;
+  background: linear-gradient(to right, #75b022, #588a1b);
+  border: none;
+  border-radius: 3px;
+  color: var(--texto-blanco);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.boton-anadir:hover {
+  background: linear-gradient(to right, #8ed629, #6aa621);
+}
+
+/* Aquí se encuentran son los filtros */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.filtro {
+  padding: 7px 14px;
+  background: rgba(103, 193, 245, 0.1);
+  border: none;
+  border-radius: 3px;
+  color: var(--azul);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.filtro span {
+  margin-left: 4px;
+  color: var(--texto-apagado);
+}
+
+.filtro:hover {
+  background: rgba(103, 193, 245, 0.25);
+  color: var(--texto-blanco);
+}
+
+.filtro.seleccionado {
+  background: var(--azul);
+  color: var(--fondo-oscuro);
+}
+
+.filtro.seleccionado span {
+  color: var(--fondo-oscuro);
+}
+
+/* ===== LISTA DE JUEGOS ===== */
+.lista-juegos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 24px 20px;
+}
+
+.juego-portada {
+  position: relative;
+  display: block;
+  background: var(--fondo-tarjeta);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.juego-portada img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+.juego-portada:hover {
+  outline: 2px solid var(--azul);
+}
+
+.juego-titulo {
+  margin: 10px 0 2px;
+  color: var(--texto-blanco);
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.juego-plataforma {
+  margin: 0;
+  color: var(--texto-apagado);
+  font-size: 12px;
+}
+
+/* El estado de las tarjetas (completado, pendiente..) ===== */
+.estado {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 3px 8px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.estado.pendiente {
+  color: var(--amarillo);
+}
+
+.estado.jugando {
+  color: var(--turquesa);
+}
+
+.estado.completado {
+  color: var(--verde);
+}
+
+/* Aquí es como se vería en un dispositivo móvil */
+
+@media (max-width: 900px) {
+  .lista-juegos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .lista-juegos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .barra-superior {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    height: auto;
+    padding: 12px 16px 0;
+  }
+
+  .menu {
+    width: 100%;
+    overflow-x: auto;
+    height: 44px;
+  }
+
+  .contenido {
+    padding: 20px 16px;
+  }
+
+  .acciones {
+    width: 100%;
+  }
+
+  .buscador {
+    flex: 1;
+    width: auto;
+  }
+
+  .juego {
+    min-width: 0;
+  }
+}
+
+.sin-resultados {
+  grid-column: 1 / -1;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--texto-apagado);
+  background: var(--fondo-tarjeta);
+  border: 1px dashed var(--borde);
+  border-radius: 8px;
+}

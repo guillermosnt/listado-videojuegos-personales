@@ -1,0 +1,91 @@
+<div class="modal-overlay">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <header class="modal-header">
+      <div>
+        <h2 id="modal-title">Añadir videojuego</h2>
+        <p>Añade un nuevo título a tu biblioteca.</p>
+      </div>
+
+      <button class="boton-cerrar" type="button" aria-label="Cerrar" (click)="close()">
+        &times;
+      </button>
+    </header>
+
+    <div class="modal-contenido">
+      <div class="campo">
+        <label for="nombre">Nombre del videojuego</label>
+        <input
+          id="nombre"
+          name="name"
+          type="text"
+          [(ngModel)]="name"
+          placeholder="Ej. Elden Ring"
+        />
+      </div>
+
+      <div class="campos-dobles">
+        <div class="campo">
+          <label for="plataforma">Plataforma</label>
+          <select id="plataforma" name="platform" [(ngModel)]="platform">
+            <option value="PC">PC</option>
+            <option value="PlayStation">PlayStation</option>
+            <option value="Xbox">Xbox</option>
+            <option value="Nintendo">Nintendo</option>
+            <option value="Otra">Otra</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="estado">Estado</label>
+          <select id="estado" name="status" [(ngModel)]="status">
+            <option value="PENDING">Pendiente</option>
+            <option value="PLAYING">Jugando</option>
+            <option value="COMPLETED">Completado</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>Portada del videojuego</label>
+
+        <label class="zona-subida">
+          @if (imagePreview) {
+            <img class="imagen-preview" [src]="imagePreview" alt="Vista previa de la portada" />
+            <strong>Imagen seleccionada</strong>
+            <span>Puedes seleccionar otra si quieres cambiarla</span>
+          } @else {
+            <span class="icono-subida">+</span>
+            <strong>Selecciona una imagen</strong>
+            <span>O arrástrala aquí</span>
+            <small>PNG, JPG o WEBP · Máximo 5 MB</small>
+          }
+
+          <input
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            hidden
+            (change)="onFileSelected($event)"
+          />
+        </label>
+      </div>
+
+      <div class="campo">
+        <label for="imagen-url">O utiliza una URL de imagen (opcional)</label>
+        <input
+          id="imagen-url"
+          name="imageUrl"
+          type="url"
+          [(ngModel)]="imageUrl"
+          (ngModelChange)="onUrlChange()"
+          placeholder="https://ejemplo.com/portada.jpg"
+        />
+      </div>
+    </div>
+
+    <footer class="modal-footer">
+      <button class="boton-cancelar" type="button" (click)="close()">Cancelar</button>
+
+      <button class="boton-guardar" type="button" (click)="saveGame()">+ Añadir videojuego</button>
+    </footer>
+  </section>
+</div>

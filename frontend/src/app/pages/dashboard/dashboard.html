@@ -1,0 +1,87 @@
+<div class="pagina">
+  <header class="barra-superior">
+    <a class="logo" href="#">LISTADO DE VIDEOJUEGOS</a>
+
+    <nav class="menu" aria-label="Menú principal">
+      <a class="menu-enlace activo" href="#" aria-current="page">Biblioteca</a>
+      <a class="menu-enlace" href="#">Pendientes</a>
+      <a class="menu-enlace" href="#">Jugando</a>
+      <a class="menu-enlace" href="#">Completados</a>
+      <a class="menu-enlace" href="#">Ajustes</a>
+    </nav>
+  </header>
+
+  <main class="contenido">
+    <div class="cabecera">
+      <h1>Mi biblioteca</h1>
+
+      <div class="acciones">
+        <input
+          class="buscador"
+          type="search"
+          placeholder="Buscar juego..."
+          aria-label="Buscar videojuegos"
+          [value]="searchTerm"
+          (input)="searchTerm = $any($event.target).value"
+        />
+
+        <button class="boton-anadir" type="button" (click)="openAddGameModal()">
+          + Añadir juego
+        </button>
+
+        @if (showAddGameModal) {
+          <app-add-game-modal
+            (closeModal)="closeAddGameModal()"
+            (gameAdded)="handleGameAdded($event)"
+          >
+          </app-add-game-modal>
+        }
+      </div>
+    </div>
+
+    <!-- Aquí están los filtros -->
+
+    <div class="filtros" aria-label="Filtrar por estado">
+      <button
+        class="filtro"
+        [class.seleccionado]="activeFilter === 'ALL'"
+        (click)="setFilter('ALL')"
+      >
+        Todos <span>{{ totalGames }}</span>
+      </button>
+
+      <button
+        class="filtro"
+        [class.seleccionado]="activeFilter === 'PENDING'"
+        (click)="setFilter('PENDING')"
+      >
+        Pendientes <span>{{ pendingGames }}</span>
+      </button>
+
+      <button
+        class="filtro"
+        [class.seleccionado]="activeFilter === 'PLAYING'"
+        (click)="setFilter('PLAYING')"
+      >
+        Jugando <span>{{ playingGames }}</span>
+      </button>
+
+      <button
+        class="filtro"
+        [class.seleccionado]="activeFilter === 'COMPLETED'"
+        (click)="setFilter('COMPLETED')"
+      >
+        Completados <span>{{ completedGames }}</span>
+      </button>
+    </div>
+
+    <!-- Listado de videojuegos que se añaden -->
+    <section class="lista-juegos" aria-label="Lista de videojuegos">
+      @for (game of filteredGames; track game.id) {
+        <app-game-card [game]="game"></app-game-card>
+      } @empty {
+        <p class="sin-resultados">No se han encontrado videojuegos.</p>
+      }
+    </section>
+  </main>
+</div>

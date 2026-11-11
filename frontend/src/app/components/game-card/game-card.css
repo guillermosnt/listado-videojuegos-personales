@@ -1,0 +1,70 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.juego {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.juego-portada {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #111820;
+  text-decoration: none;
+}
+
+.juego-portada img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.juego-portada:hover img {
+  transform: scale(1.05);
+}
+
+.estado {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+.estado.pendiente {
+  background: #d97706;
+}
+
+.estado.jugando {
+  background: #2563eb;
+}
+
+.estado.completado {
+  background: #16a34a;
+}
+
+.juego-titulo {
+  margin: 4px 0 0;
+  color: #f1f5f9;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.juego-plataforma {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+}

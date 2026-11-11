@@ -1,0 +1,24 @@
+<article class="juego">
+  <a class="juego-portada" href="#" [attr.aria-label]="'Ver ' + game.name">
+    <img [src]="game.imageUrl" [alt]="'Portada de ' + game.name" loading="lazy" />
+
+    <span
+      class="estado"
+      [class.pendiente]="game.status === 'PENDING'"
+      [class.jugando]="game.status === 'PLAYING'"
+      [class.completado]="game.status === 'COMPLETED'"
+    >
+      {{
+        game.status === 'PENDING'
+          ? 'Pendiente'
+          : game.status === 'PLAYING'
+            ? 'Jugando'
+            : 'Completado'
+      }}
+    </span>
+  </a>
+
+  <h2 class="juego-titulo">{{ game.name }}</h2>
+
+  <p class="juego-plataforma">{{ game.platform }}</p>
+</article>
