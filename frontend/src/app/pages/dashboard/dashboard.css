@@ -59,16 +59,23 @@ a {
   display: flex;
   gap: 4px;
   height: 100%;
+  min-width: 0;
 }
 
 .menu-enlace {
   display: flex;
   align-items: center;
+  flex: 0 0 auto;
   padding: 0 14px;
   color: var(--texto-apagado);
   font-size: 13px;
   text-transform: uppercase;
   border-bottom: 3px solid transparent;
+}
+
+.menu-enlace:focus-visible {
+  outline: 2px solid var(--azul);
+  outline-offset: -4px;
 }
 
 .menu-enlace:hover {
@@ -105,11 +112,13 @@ a {
 
 .acciones {
   display: flex;
+  min-width: 0;
   gap: 10px;
 }
 
 /* ===== BUSCADOR Y BOTÓN ===== */
 .buscador {
+  min-width: 0;
   width: 240px;
   padding: 9px 12px;
   background: #316282;
@@ -125,17 +134,25 @@ a {
 }
 
 .buscador:focus {
-  outline: none;
   border-color: var(--azul);
 }
 
+.buscador:focus-visible,
+.boton-anadir:focus-visible,
+.filtro:focus-visible {
+  outline: 2px solid var(--azul);
+  outline-offset: 2px;
+}
+
 .boton-anadir {
+  min-height: 40px;
   padding: 9px 18px;
   background: linear-gradient(to right, #75b022, #588a1b);
   border: none;
   border-radius: 3px;
   color: var(--texto-blanco);
   font-size: 13px;
+  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -154,6 +171,7 @@ a {
 }
 
 .filtro {
+  min-height: 40px;
   padding: 7px 14px;
   background: rgba(103, 193, 245, 0.1);
   border: none;
@@ -185,71 +203,26 @@ a {
 /* ===== LISTA DE JUEGOS ===== */
 .lista-juegos {
   display: grid;
+  min-width: 0;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 24px 20px;
-}
-
-.juego-portada {
-  position: relative;
-  display: block;
-  background: var(--fondo-tarjeta);
-  border-radius: 3px;
-  overflow: hidden;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-}
-
-.juego-portada img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-}
-
-.juego-portada:hover {
-  outline: 2px solid var(--azul);
-}
-
-.juego-titulo {
-  margin: 10px 0 2px;
-  color: var(--texto-blanco);
-  font-size: 14px;
-  font-weight: normal;
-}
-
-.juego-plataforma {
-  margin: 0;
-  color: var(--texto-apagado);
-  font-size: 12px;
-}
-
-/* El estado de las tarjetas (completado, pendiente..) ===== */
-.estado {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  padding: 3px 8px;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 2px;
-  font-size: 11px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.estado.pendiente {
-  color: var(--amarillo);
-}
-
-.estado.jugando {
-  color: var(--turquesa);
-}
-
-.estado.completado {
-  color: var(--verde);
 }
 
 /* Aquí es como se vería en un dispositivo móvil */
 
 @media (max-width: 900px) {
+  .barra-superior {
+    gap: 24px;
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .menu {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+  }
+
   .lista-juegos {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -274,6 +247,10 @@ a {
     height: 44px;
   }
 
+  .menu-enlace {
+    min-height: 44px;
+  }
+
   .contenido {
     padding: 20px 16px;
   }
@@ -287,9 +264,21 @@ a {
     width: auto;
   }
 
-  .juego {
-    min-width: 0;
+  .buscador,
+  .boton-anadir {
+    min-height: 44px;
   }
+
+  .boton-anadir {
+    flex-shrink: 0;
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .filtro {
+    min-height: 44px;
+  }
+
 }
 
 .sin-resultados {
